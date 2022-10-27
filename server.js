@@ -32,6 +32,6 @@ app.post('/signin', (req, res)=> signin.handleSignin(req, res, db, bcrypt))
 app.post('/register', (req, res)=>register.handleRegister( req, res, db, bcrypt))
 app.post('/addtask', (req, res) => tasks.handleTaskAdd(req, res, db))
 
-app.listen(3000, ()=> {
+app.listen(process.env.PORT, ()=> {
   console.log('Runnng on port 3000')
 })
