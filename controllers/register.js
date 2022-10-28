@@ -15,7 +15,7 @@ const handleRegister = (req, res, db, bcrypt) => {
     .into('login')
     .returning('email')
     .then(emails=>{ 
-        trx.insert({
+      return trx.insert({
           email: emails[0].email,
           username: username,
           creation_date: new Date()
