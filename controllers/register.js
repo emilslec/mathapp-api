@@ -14,10 +14,9 @@ const handleRegister = (req, res, db, bcrypt) => {
         username: username,
         creation_date: new Date()
       })
-      .then(response=>res.json(response[0]))
-      .catch(err=> res.json(err))
   )
-  .catch(err=> res.json(err + "2"))
+  .then(response=>res.json(response[0]))
+  .catch( res.json("cant"))
 }
 
 module.exports={
