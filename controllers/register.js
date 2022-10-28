@@ -15,18 +15,17 @@ const handleRegister = (req, res, db, bcrypt) => {
     .into('login')
     .returning('email')
     .then(emails=>{ 
-      return trx('user')
-      .returning('email')
-      .insert({
-        email: emails[0].email,
-        username: username,
-        creation_date: new Date()
+      return trx('public.user')
+        .returning('email')
+        .insert({
+          email: emails[0].email,
+          username: username,
+          creation_date: new Date()
+        })
+        .then(response=>res.json(response[0]))
       })
-      .then(response=>res.json(response[0]))
-      .catch( res.json("cant"))}
-    )
     .then(trx.commit)
-    .catch(res.json("cant"))
+    .catch(trx.rollback)
   })
 .catch(res.json("cant"))
 }
