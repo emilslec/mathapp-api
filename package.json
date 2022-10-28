@@ -7,6 +7,9 @@
     "nodemon": "^2.0.20",
     "pg": "^8.8.0"
   },
+  "name": "matematikasuzdevumiapi",
+  "version": "1.0.0",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   }
