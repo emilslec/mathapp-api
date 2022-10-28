@@ -8,16 +8,16 @@ const handleRegister = (req, res, db, bcrypt) => {
     email: email,
     hash: hash
   })
-  .then(response => {
+  .then(
       db('user').returning('email').insert({
         email: email,
         username: username,
         creation_date: new Date()
       })
       .then(response=>res.json(response[0]))
-      .catch(err=> res.json("cant"))
-  })
-  .catch(err=> res.json("cant"))
+      .catch(err=> res.json(err))
+  )
+  .catch(err=> res.json(err + "2"))
 }
 
 module.exports={
