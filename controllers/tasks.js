@@ -8,6 +8,7 @@ const handleTasks = (req, res, db) => {
     .where({theme_id: id})
     .table('task')
     .then(tasks=>{
+      res.json(tasks)
       let taskz = []
       tasks.forEach((task, i) => {
         const username = db.select('username').where({email: task.user_email}).table('user')
