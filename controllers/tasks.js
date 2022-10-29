@@ -9,7 +9,7 @@ const handleTasks = (req, res, db) => {
     .table('task')
     .then(tasks=>{
       tasks.forEach(task => {
-        const username = db.select('username').where({email: user_email}).table('user')
+        const username = db.select('username').where({email: task.user_email}).table('user')
          return ({...task, user_email:username})        
       });
     })
