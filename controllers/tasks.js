@@ -5,6 +5,18 @@ const handleTasks = (req, res, db) => {
      .where({theme_id: id})
        .table('task')
        .then(data => res.send(data))  
+
+
+   db.select()
+    .where({theme_id: id})
+    .table('task')
+    .then(tasks=>{
+      tasks.forEach(task => {
+        const username = db.select('username').where({email: user_email}).table('user')
+         return ({...task, user_email:username})        
+      });
+    })
+    .then(tasks=> res.json(tasks))
 };
 
 const handleTaskPoint = (req, res, db)=> {
@@ -23,6 +35,7 @@ const handleTaskAdd = (req, res, db) => {
   if(!name || !text ||!answer || !theme || !email|| !level){
     return res.status(400).json('can dod this boss')
   }
+
   db('task').returning('task_id').insert({
        task_name: name,
        task_text:text,
@@ -39,7 +52,7 @@ const handleTaskAdd = (req, res, db) => {
     .then(response=> res.json(response[0]))
     )
   
-  .catch(err => res.status(400).json("this is the error : " + err));
+  .catch(err => res.status(400).json("this is the error "));
 }
 
 
