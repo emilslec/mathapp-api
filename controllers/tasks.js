@@ -15,7 +15,7 @@ const handleTasks = (req, res, db) => {
           .then(username=>{
             taskz.push({...task, user_email:username})        
           })
-          .then(res.json(task))
+          .then(res.json(taskz))
       })
       res.json(taskz) 
     })
