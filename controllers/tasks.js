@@ -2,7 +2,9 @@
 const handleTasks = (req, res, db) => {
     const {id} = req.body;
  
+  db.transaction(trx => {
 
+  })
 
    db.select()
     .where({theme_id: id})
@@ -10,10 +12,12 @@ const handleTasks = (req, res, db) => {
     .then(tasks=>{
       let taskz = []
       tasks.forEach((task, i) => {
-       
-        const username = db.select('username').where({email: task.user_email}).table('user')
-         res.json(username)
-         taskz.push({...task, user_email:username})        
+        db.select('username')
+          .where({email: task.user_email})
+          .table('user')
+          .then(username=>{
+            taskz.push({...task, user_email:username})        
+          })
       })
       res.json(taskz) 
     })
