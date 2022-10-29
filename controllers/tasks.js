@@ -1,10 +1,7 @@
 
 const handleTasks = (req, res, db) => {
     const {id} = req.body;
-    db.select()
-     .where({theme_id: id})
-       .table('task')
-       .then(data => res.send(data))  
+ 
 
 
    db.select()
