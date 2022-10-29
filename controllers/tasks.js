@@ -11,9 +11,11 @@ const handleTasks = (req, res, db) => {
       tasks.forEach(task => {
         const username = db.select('username').where({email: task.user_email}).table('user')
          return ({...task, user_email:username})        
-      });
+      })
+      .then(tasks=> res.json(tasks))
     })
-    .then(tasks=> res.json(tasks))
+    .catch(err=>res.json(err))
+    
 };
 
 const handleTaskPoint = (req, res, db)=> {
