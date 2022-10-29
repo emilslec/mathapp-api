@@ -2,9 +2,6 @@
 const handleTasks = (req, res, db) => {
     const {id} = req.body;
  
-  db.transaction(trx => {
-
-  })
 
    db.select()
     .where({theme_id: id})
@@ -18,6 +15,7 @@ const handleTasks = (req, res, db) => {
           .then(username=>{
             taskz.push({...task, user_email:username})        
           })
+          .then(res.json(task))
       })
       res.json(taskz) 
     })
