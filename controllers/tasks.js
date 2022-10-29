@@ -1,26 +1,11 @@
 
 const handleTasks = (req, res, db) => {
     const {id} = req.body;
- 
-
    db.select()
     .where({theme_id: id})
-    .table('task')
-    .then(tasks=>{
-      let taskz = []
-      tasks.forEach((task, i) => {
-        db.select('username')
-          .where({email: task.user_email})
-          .table('user')
-          .then(username=>{
-            taskz.push({...task, user_email:username})        
-          })
-          .then(res.json(taskz))
-      })
-      res.json(taskz) 
-    })
-    .then(tasks=> res.json(tasks))
-    .catch(err=>res.json(err))
+      .table('task')
+  .then(tasks=> res.json(tasks))
+  .catch(err=>res.json(err))
     
 };
 
