@@ -5,7 +5,7 @@ const handleTasks = (req, res, db) => {
     .where({theme_id: id})
       .table('task')
       .then(taskss => {
-        res.json(tasks)
+        res.json(taskss)
           let goodtask = []
           
           taskss.forEach((task, i)=> {
