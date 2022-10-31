@@ -13,9 +13,9 @@ const handleTasks = (req, res, db) => {
             .then(
               goodtask.push({...task,user_email:name}))
           })
-       
+          return goodtask
       })
-      .then(res.json(goodtask))
+      .then(resp =>res.json(resp))
       .catch(err=> res.json(err))
 };
 
