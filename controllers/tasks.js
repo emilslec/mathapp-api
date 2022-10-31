@@ -11,7 +11,7 @@ const handleTasks = (req, res, db) => {
             .returning('username')
             .where('email', '=', task.user_email))
             .then(
-              goodtask.push({...task,user_email:name}))
+              res.json(name))
           })
           return goodtask
       })
