@@ -4,18 +4,7 @@ const handleTasks = (req, res, db) => {
    db.select()
     .where({theme_id: id})
       .table('task')
-      .then(taskss => {
-          let goodtask = [] 
-          taskss.forEach((task, i)=> {
-            let name = (db('user')
-            .returning('username')
-            .where('email', '=', task.user_email))
-            .then(
-              res.json(name))
-          })
-          return goodtask
-      })
-      .then(resp =>res.json(resp))
+    .then(resp =>res.json(resp))
       .catch(err=> res.json(err))
 };
 
