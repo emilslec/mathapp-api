@@ -4,9 +4,18 @@ const handleTasks = (req, res, db) => {
    db.select()
     .where({theme_id: id})
       .table('task')
-  .then(tasks=> res.json(tasks))
-  .catch(err=>res.json(err))
-    
+      .then(taskss => {
+          let goodtask = []
+          
+          taskss.forEach((task, i)=> {
+            let name = (db('user')
+            .returning('username')
+            .where('email', '=', task.user_email))
+              goodtask.push({...task,user_email:name})
+          })
+        res.json(goodtask)
+      })
+      .catch(err=> res.json(err))
 };
 
 const handleTaskPoint = (req, res, db)=> {
