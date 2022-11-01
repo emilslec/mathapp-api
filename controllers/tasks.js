@@ -13,7 +13,7 @@ const handleTaskPoint = (req, res, db)=> {
   const {email, taskId} = req.body;
     if(!req.body.email)return res.json('annony')
   db('user')
-    .insert({tasks_completed_id:[taskId]})
+    .insert({tasks_completed_id:taskId})
     .returning('tasks_completed')
     .where('email', '=', email)
     .increment('tasks_completed', 1)
