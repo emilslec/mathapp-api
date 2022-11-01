@@ -66,8 +66,9 @@ const handleTasks = () => {
     const userss = users;
     let goodtask = []
    db.forEach((task, i)=> {
-    let name =  "a"
-        
+    let name = userss.filter(user=>{
+         return "a"
+        })
         goodtask.push({...task,user_email:name})
    })
    return(goodtask)

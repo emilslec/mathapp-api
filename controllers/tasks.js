@@ -4,8 +4,9 @@ const handleTasks = (req, res, db) => {
    db.select()
     .where({theme_id: id})
       .table('task')
-    .then(resp =>res.json(resp))
-      .catch(err=> res.json(err))
+        .orderBy('task_level')
+   .then(resp =>res.json(resp))
+    .catch(err=> res.json(err))
 };
 
 const handleTaskPoint = (req, res, db)=> {
