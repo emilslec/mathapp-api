@@ -6,7 +6,7 @@ const handleTasks = (req, res, db) => {
       .table('task')
         .orderBy([
           { column: 'task_level' }, 
-          { column: 'task_id', order: 'desc' }
+          { column: 'task_id', order: 'asc' }
         ])
    .then(resp =>res.json(resp))
     .catch(err=> res.json(err))
