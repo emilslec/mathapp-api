@@ -3,10 +3,10 @@ const handleProblem = (res, req, db) => {
     if(!name || !description ){
 		return res.status(400).json('incorrect submition')
 	}
-    db('problem').returning('task_name')
+    db('problem').returning('problem_name')
         .insert({
-            task_name: name,
-            task_description: description,
+            problem_name: name,
+            problem_description: description,
             add_date: new Date()
         })
     .then(resp=>res.json(resp[0]))
