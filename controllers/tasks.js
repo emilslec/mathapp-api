@@ -4,7 +4,9 @@ const handleTasks = (req, res, db) => {
    db.select()
     .where({theme_id: id})
       .table('task')
-        .orderBy('task_level','task_id' )
+        .orderBy([
+          {column:'task_level'},
+          {column:'task_id'}])
    .then(resp =>res.json(resp))
     .catch(err=> res.json(err))
 };
