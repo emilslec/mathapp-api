@@ -9,7 +9,7 @@ const handleProblem = (res, req, db) => {
             task_description: description,
             add_date: new Date()
         })
-    .then(resp=>res.json(resp))
+    .then(resp=>res.json(resp[0]))
 }
 
 module.exports = {
