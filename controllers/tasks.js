@@ -4,14 +4,13 @@ const handleTasks = (req, res, db) => {
    db.select()
     .where({theme_id: id})
       .table('task')
-        .orderBy([
-          {column:'task_level'},
-          {column:'task_id'}])
+        .orderBy('task_level', 'asc')
+          .orderBy('task_id', 'asc')
    .then(resp =>res.json(resp))
     .catch(err=> res.json(err))
 };
 
-const handleTaskPoint = (req, res, db)=> {
+const handleTaskPoint = (req, res, dba)=> {
   const {email, taskId} = req.body;
     if(!req.body.email)return res.json('annony')
   db('user')
