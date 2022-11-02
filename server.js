@@ -3,10 +3,11 @@ const knex = require('knex');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 
-const tasks = require('./controllers/tasks')
+const tasks = require('./controllers/tasks').default
 const register = require('./controllers/register')
 const signin = require('./controllers/signin')
 const themes = require('./controllers/themes')
+const problem = require('./controllers/problem')
 
 const db = knex({
   client: 'pg',
@@ -30,6 +31,7 @@ app.post('/taskpoint', (req, res) => tasks.handleTaskPoint(req, res, db))
 app.post('/signin', (req, res)=> signin.handleSignin(req, res, db, bcrypt))
 app.post('/register', (req, res)=>register.handleRegister( req, res, db, bcrypt))
 app.post('/addtask', (req, res) => tasks.handleTaskAdd(req, res, db))
+app.post('/problem', (res, req) => problem.handleProblem(req, res, db))
 
 app.listen(process.env.PORT || 3000, ()=> {
   console.log(`Runnng on port ${process.env.PORT}`)
