@@ -4,7 +4,7 @@ const handleTasks = (req, res, db) => {
    db.select()
     .where({theme_id: id})
       .table('task')
-        .orderBy('task_level')
+        .orderBy('task_level','task_id' )
    .then(resp =>res.json(resp))
     .catch(err=> res.json(err))
 };
@@ -13,7 +13,6 @@ const handleTaskPoint = (req, res, db)=> {
   const {email, taskId} = req.body;
     if(!req.body.email)return res.json('annony')
   db('user')
-    .insert([{tasks_completed_id:[taskId]}])
     .returning('tasks_completed')
     .where('email', '=', email)
     .increment('tasks_completed', 1)
