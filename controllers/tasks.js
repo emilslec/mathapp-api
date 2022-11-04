@@ -46,7 +46,7 @@ const handleTaskAdd = (req, res, db) => {
     .then(response=> res.json(response[0]))
     )
   
-  .catch(err => res.status(400).json("this is the error "));
+  .catch(err => res.status(400).json(err));
 }
 
 
