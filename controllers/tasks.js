@@ -42,7 +42,7 @@ const handleTaskAdd = (req, res, db) => {
     .returning('user_email')
     .then(emaill=>{
       return db('public.user')
-      .where('email', '=', emaill)
+      .where('email', '=', email)
       .increment('tasks_added', 1)
         .returning('tasks_added')
         .then(response=> res.json(response))
