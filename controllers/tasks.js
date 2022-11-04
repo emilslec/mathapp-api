@@ -12,8 +12,8 @@ const handleTasks = (req, res, db) => {
     .catch(err=> res.json(err))
 };
 
-const handleTaskPoint = (req, res, dba)=> {
-  const {email, taskId} = req.body;
+const handleTaskPoint = (req, res, db)=> {
+  const {email} = req.body;
     if(!req.body.email)return res.json('annony')
   db('user')
     .returning('tasks_completed')
