@@ -28,24 +28,28 @@ const handleTaskAdd = (req, res, db) => {
   const {name, text, answer, theme, email, level} = req.body;
   if(!name || !text ||!answer || !theme || !email|| !level){
     return res.status(400).json('can dod this boss')
-  }
-
-  db('task').returning('task_id').insert({
-       task_name: name,
-       task_text:text,
-       task_answer:answer,
-       theme_id: theme,
-       user_email:email,
-       task_level: level }
-    )
-  .then(
-    db('user')
-      .returning('tasks_added')
-      .where('email', '=', email)
-    .increment('tasks_added', 1)
-    .then(response=> res.json(response[0]))
-    )
-  
+    }
+  db.transaction(trx=>{
+    trx.insert({
+        task_name: name,
+        task_text:text,
+        task_answer:answer,
+        theme_id: theme,
+        user_email:email,
+        task_level: level 
+      })
+    .into('task')
+    .returning('user_email')
+    .then(emaill=>{
+      return trx.increment('tasks_added', 1)
+        .into('user')
+        .where('email', '=', emaill)
+        .returning('tasks_added')
+        .then(response=> res.json(response[0]))
+    })
+    .then(trx.commit)
+    .catch(trx.rollback)
+  })
   .catch(err => res.status(400).json(err));
 }
 
