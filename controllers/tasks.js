@@ -42,8 +42,8 @@ const handleTaskAdd = (req, res, db) => {
     .returning('user_email')
     .then(emaill=>{
       return trx.increment('tasks_added', 1)
-        .into('user')
         .where('email', '=', emaill)
+        .into('user')
         .returning('tasks_added')
         .then(response=> res.json(response[0]))
     })
