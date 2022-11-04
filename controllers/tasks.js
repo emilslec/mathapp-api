@@ -41,11 +41,11 @@ const handleTaskAdd = (req, res, db) => {
     .into('task')
     .returning('user_email')
     .then(emaill=>{
-      return trx('public.user')
+      return db('public.user')
       .where('email', '=', emaill)
       .increment('tasks_added', 1)
         .returning('tasks_added')
-        .then(response=> res.json("idk mens"))
+        .then(response=> res.json(response))
     })
     .then(trx.commit)
     .catch(trx.rollback)
