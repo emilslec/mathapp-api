@@ -55,7 +55,7 @@ const handleTaskAdd = (req, res, db) => {
 
 
 module.exports = {
-    handleTasks,
-    handleTaskPoint,
-    handleTaskAdd
+  handleTasks,
+  handleTaskPoint,
+  handleTaskAdd
 };
