@@ -52,7 +52,7 @@ const handleTaskAdd = (req, res, db) => {
     .then(trx.commit)
     .catch(trx.rollback)
   })
-  .catch(err => res.status(400).json(err));
+  .catch(err => res.status(400).json("nice adding invalid variables or " + err));
 }
 
 
