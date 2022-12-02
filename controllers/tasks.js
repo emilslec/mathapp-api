@@ -29,7 +29,7 @@ const handleTaskAdd = (req, res, db) => {
   if(!name || !text ||!answer || !theme || !email|| !level){
     return res.status(400).json('cantnt dod this boss')
     }
-  if(level>5||level<0||!Number.isInteger(level))return res.json("mr pls use the valid difficulty ;)")
+  if(level>5||level<0)return res.json("mr pls use the valid difficulty ;)")
 
   db.transaction(trx=>{
     trx.insert({
