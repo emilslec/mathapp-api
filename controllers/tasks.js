@@ -7,16 +7,7 @@ const handleTasks = (req, res, db) => {
         .orderBy([
           { column: 'task_level' }, 
           { column: 'task_id', order: 'asc' }
-        ])
-    .then(resp => {
-      let betterboi = []
-      resp.map((ress, i) => {
-        let betterobj = {...ress,user_email: 
-          db('user').where({email:ress.user_email}).select('username')}
-        betterboi.push(betterobj);
-      })
-      res.json(betterboi)
-    })
+        ]) 
    .then(resp =>res.json(resp))
 
    .catch(err=> res.json(err))
