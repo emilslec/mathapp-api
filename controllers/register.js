@@ -1,6 +1,7 @@
 const handleRegister = (req, res, db, bcrypt) => {
     
-  const { email, password, username } = req.body;
+  const { password, username } = req.body;
+  let { email } = req.body;
   if(!email || !username || !password) return res.status(400).json('incorrect submition')
 	
   const passwordRegex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
@@ -8,6 +9,7 @@ const handleRegister = (req, res, db, bcrypt) => {
   
   if(!passwordRegex.test(password)) return res.status(400).json('buddy this is not legally2')
   if(!emailRegex.test(email)) return res.status(400).json('buddy this is not legally')
+  RegExpReplace(email, "\s+", "");
   
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
