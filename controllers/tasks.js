@@ -26,8 +26,8 @@ const handleTaskPoint = (req, res, db)=> {
 
 const handleTaskAdd = (req, res, db) => {
 
-  const {name, text, answer, theme, email, level} = req.body;
-  if(!name || !text ||!answer || !theme || !email|| !level){
+  const {name, text, answer, theme, email, level, info} = req.body;
+  if(!name || !text ||!answer || !theme || !email|| !level|| !info){
     return res.status(400).json('cantnt dod this boss')
     }
   if(level>5||level<0)return res.json("mr pls use the valid difficulty ;)")
@@ -36,6 +36,7 @@ const handleTaskAdd = (req, res, db) => {
     trx.insert({
         task_name: name,
         task_text:text,
+        task_info,
         task_answer:answer,
         theme_id: theme,
         user_email:email,
