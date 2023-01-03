@@ -36,7 +36,7 @@ const handleTaskAdd = (req, res, db) => {
     trx.insert({
         task_name: name,
         task_text:text,
-        task_info,
+        task_info: info,
         task_answer:answer,
         theme_id: theme,
         user_email:email,
