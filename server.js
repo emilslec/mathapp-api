@@ -27,6 +27,7 @@ app.use(express.json());
 app.get('/', (req, res)=> res.send('pog'))
 app.post('/tasks',(req, res) => tasks.handleTasks(req, res, db))
 app.get('/themes', (req,res) => themes.handleThemes(req, res, db))
+app.post('/addtheme', (req,res) => themes.handleAddTheme(req, res, db))
 app.post('/taskpoint', (req, res) => tasks.handleTaskPoint(req, res, db))
 app.post('/signin', (req, res)=> signin.handleSignin(req, res, db, bcrypt))
 app.post('/register', (req, res)=>register.handleRegister( req, res, db, bcrypt))
