@@ -9,7 +9,6 @@ const handleTasks = (req, res, db) => {
           { column: 'task_id', order: 'asc' }
         ]) 
    .then(resp =>res.json(resp))
-
    .catch(err=> res.json(err))
 };
 
@@ -68,10 +67,21 @@ const handleTaskAdd = (req, res, db) => {
   })
   .catch(err => res.status(400).json("nice adding invalid variables or " + err));
 }
+const handleCompl = (req, res, db) => {
+  const {email} = req.body;
+  
+  if(!email)return res.json('annony')
+  db.select()
+    .where({user_email: email})
+      .table('completed')
+   .then(resp =>res.json(resp))
+   .catch(err=> res.json(err))
+}
 
 
 module.exports = {
   handleTasks,
   handleTaskPoint,
-  handleTaskAdd
+  handleTaskAdd,
+  handleCompl
 };
