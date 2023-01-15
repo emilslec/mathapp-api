@@ -72,7 +72,7 @@ const handleCompl = (req, res, db) => {
   const {email} = req.body;
   
   if(!email)return res.json('annony')
-  db.select()
+  db.select('task_id')
     .where({user_email: email})
       .table('completed')
    .then(resp =>res.json(resp))
