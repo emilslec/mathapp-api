@@ -26,7 +26,7 @@ const handleTaskPoint = (req, res, db)=> {
       .then(emil=>{
         return trx.increment('tasks_completed', 1)
         .where('email', '=', emil[0].user_email)
-        .into('user')
+        .into('public.user')
           .returning('tasks_completed')
           .then(response=> res.json(response[0].tasks_completed))
       })
