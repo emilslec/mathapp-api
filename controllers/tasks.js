@@ -14,13 +14,25 @@ const handleTasks = (req, res, db) => {
 };
 
 const handleTaskPoint = (req, res, db)=> {
-  const {email} = req.body;
-    if(!req.body.email)return res.json('annony')
-  db('user')
-    .returning('tasks_completed')
-    .where('email', '=', email)
-    .increment('tasks_completed', 1)
-  .then(response=> res.json(response[0].tasks_completed))
+  const {email, task} = req.body;
+    if(!email, task)return res.json('annony')
+    db.transaction(trx=>{
+      trx.insert({
+        task_id:task,
+        user_emial:email
+      })
+      .into('completed')
+      .returning('user_email')
+      .then(emil=>{
+        return trx.increment('tasks_completed', 1)
+        .where('email', '=', emil[0].user_email)
+        .into('user')
+          .returning('tasks_completed')
+          .then(response=> res.json(response[0].tasks_completed))
+      })
+      .then(trx.commit)
+      .catch(trx.rollback)
+    })
   .catch(err => res.status(400).json(err))
 }
 
