@@ -19,7 +19,7 @@ const handleTaskPoint = (req, res, db)=> {
     db.transaction(trx=>{
       trx.insert({
         task_id:task,
-        user_emial:email
+        user_email:email
       })
       .into('completed')
       .returning('user_email')
