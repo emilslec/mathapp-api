@@ -14,7 +14,8 @@ const handleTasks = (req, res, db) => {
 
 const handleTaskPoint = (req, res, db)=> {
   const {email, task} = req.body;
-    if(!email, task)return res.json('annony')
+    if(!email|| !task)return res.json('annony')
+    
     db.transaction(trx=>{
       trx.insert({
         task_id:task,
@@ -24,7 +25,7 @@ const handleTaskPoint = (req, res, db)=> {
       .returning('user_email')
       .then(emil=>{
         return trx.increment('tasks_completed', 1)
-        .where('email', '=', emil[0].user_email)
+        .where('email', '=', email)
         .into('public.user')
           .returning('tasks_completed')
           .then(response=> res.json(response[0].tasks_completed))
