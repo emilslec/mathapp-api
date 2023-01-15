@@ -1,6 +1,9 @@
 const handleSignin = (req, res, db, bcrypt) => {
+
     const { email, password, } = req.body;
+
     if(!email||!password){return res.json("cants")}
+
     db.select('email','hash').from('login')
     .where('email', '=', email)
     .then(data => {
@@ -8,7 +11,8 @@ const handleSignin = (req, res, db, bcrypt) => {
       const status = bcrypt.compareSync(password, data[0].hash)
       if(status){
         db.select('email', 'username', 'tasks_added', 'tasks_completed').from('user')
-        .where('email', '=', email) 
+        .where('email', '=', email)
+        // .then(resp=>)
         .then(response=>res.json(response[0]))
       }
       else if(!status){
@@ -19,5 +23,5 @@ const handleSignin = (req, res, db, bcrypt) => {
 }
 
 module.exports = {
-    handleSignin
+  handleSignin
 }
