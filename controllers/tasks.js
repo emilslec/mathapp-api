@@ -33,7 +33,7 @@ const handleTaskPoint = (req, res, db)=> {
       .then(trx.commit)
       .catch(trx.rollback)
     })
-  .catch(err => res.status(400).json(err))
+  .catch(err => res.json("don"))
 }
 
 const handleTaskAdd = (req, res, db) => {
