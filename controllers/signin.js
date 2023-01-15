@@ -12,8 +12,13 @@ const handleSignin = (req, res, db, bcrypt) => {
       if(status){
         db.select('email', 'username', 'tasks_added', 'tasks_completed').from('user')
         .where('email', '=', email)
-        // .then(resp=>)
-        .then(response=>res.json(response[0]))
+        .then(resp=>{
+          db.select('task_id').from('completed').where('user_email', '=', email)
+          .then(tsk=>{
+            res.json({...resp, tasks_completed: tsk})
+          })
+        })
+        // .then(response=>res.json(response[0]))
       }
       else if(!status){
           res.json('fail')
