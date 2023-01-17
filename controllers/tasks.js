@@ -37,13 +37,11 @@ const handleTaskPoint = (req, res, db)=> {
 }
 
 const handleTaskAdd = (req, res, db) => {
-
   const {name, text, answer, theme, email, level, info} = req.body;
   if(!name || !text ||!answer || !theme || !email|| !level){
     return res.status(400).json('cantnt dod this boss')
     }
   if(level>5||level<0)return res.json("mr pls use the valid difficulty ;)")
-
   db.transaction(trx=>{
     trx.insert({
         task_name: name,
@@ -68,6 +66,7 @@ const handleTaskAdd = (req, res, db) => {
   })
   .catch(err => res.status(400).json("nice adding invalid variables or " + err));
 }
+
 const handleCompl = (req, res, db) => {
   const {email} = req.body;
   
