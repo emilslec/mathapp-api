@@ -8,6 +8,7 @@ const register = require('./controllers/register')
 const signin = require('./controllers/signin')
 const themes = require('./controllers/themes')
 const problem = require('./controllers/problem')
+const chad = require('./controllers/chad')
 
 const db = knex({
   client: 'pg',
@@ -34,6 +35,7 @@ app.post('/signin', (req, res)=> signin.handleSignin(req, res, db, bcrypt))
 app.post('/register', (req, res)=>register.handleRegister( req, res, db, bcrypt))
 app.post('/addtask', (req, res) => tasks.handleTaskAdd(req, res, db))
 app.post('/problem', (res, req) => problem.handleProblem(req, res, db))
+app.post('/chad', (res, req) => chad.handleChad(req, res))
 
 app.listen(process.env.PORT || 3000, ()=> {
   console.log(`Runnng on port ${process.env.PORT}`)
