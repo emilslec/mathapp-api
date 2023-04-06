@@ -5,7 +5,7 @@ const handleChad = (req, res) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + String("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")
+          'Authorization': 'Bearer ' + process.env.KEYY
         },
         body: JSON.stringify({
           "model": "gpt-3.5-turbo",
