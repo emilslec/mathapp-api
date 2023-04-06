@@ -10,31 +10,31 @@ const themes = require('./controllers/themes')
 const problem = require('./controllers/problem')
 const chad = require('./controllers/chad')
 
-const db = knex({
-  client: 'pg',
-   connection: {
-    connectionString : process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-  },
-  }
-});
+// const db = knex({
+//   client: 'pg',
+//    connection: {
+//     connectionString : process.env.DATABASE_URL,
+//     ssl: {
+//       rejectUnauthorized: false,
+//   },
+//   }
+// });
 
 const app = express();
 app.use(cors());
 
 app.use(express.json());
 
-app.get('/', (req, res)=> res.send('pog'))
-app.post('/tasks',(req, res) => tasks.handleTasks(req, res, db))
-app.get('/themes', (req,res) => themes.handleThemes(req, res, db))
-app.post('/addtheme', (req,res) => themes.handleAddTheme(req, res, db))
-app.post('/taskpoint', (req, res) => tasks.handleTaskPoint(req, res, db))
-app.post('/compl', (req, res)=> tasks.handleCompl(req, res, db))
-app.post('/signin', (req, res)=> signin.handleSignin(req, res, db, bcrypt))
-app.post('/register', (req, res)=>register.handleRegister( req, res, db, bcrypt))
-app.post('/addtask', (req, res) => tasks.handleTaskAdd(req, res, db))
-app.post('/problem', (res, req) => problem.handleProblem(req, res, db))
+// app.get('/', (req, res)=> res.send('pog'))
+// app.post('/tasks',(req, res) => tasks.handleTasks(req, res, db))
+// app.get('/themes', (req,res) => themes.handleThemes(req, res, db))
+// app.post('/addtheme', (req,res) => themes.handleAddTheme(req, res, db))
+// app.post('/taskpoint', (req, res) => tasks.handleTaskPoint(req, res, db))
+// app.post('/compl', (req, res)=> tasks.handleCompl(req, res, db))
+// app.post('/signin', (req, res)=> signin.handleSignin(req, res, db, bcrypt))
+// app.post('/register', (req, res)=>register.handleRegister( req, res, db, bcrypt))
+// app.post('/addtask', (req, res) => tasks.handleTaskAdd(req, res, db))
+// app.post('/problem', (res, req) => problem.handleProblem(req, res, db))
 app.post('/chad', (res, req) => chad.handleChad(req, res))
 
 app.listen(process.env.PORT || 3000, ()=> {
