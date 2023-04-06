@@ -3,11 +3,11 @@ const knex = require('knex');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 
-const tasks = require('./controllers/tasks')
-const register = require('./controllers/register')
-const signin = require('./controllers/signin')
-const themes = require('./controllers/themes')
-const problem = require('./controllers/problem')
+// const tasks = require('./controllers/tasks')
+// const register = require('./controllers/register')
+// const signin = require('./controllers/signin')
+// const themes = require('./controllers/themes')
+// const problem = require('./controllers/problem')
 const chad = require('./controllers/chad')
 
 // const db = knex({

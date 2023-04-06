@@ -19,7 +19,7 @@ const handleChad = (req, res) => {
           .then(data => {
             res.json(data.choices[0].message.content)
         }).catch(err => {
-          console.log("Ran out of tokens for today! Try tomorrow! \n"+err);
+          res.json("Ran out of tokens for today! Try tomorrow! \n"+err);
         });
       }
 
